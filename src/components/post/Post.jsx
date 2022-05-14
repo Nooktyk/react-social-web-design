@@ -1,34 +1,66 @@
 import { MoreVert } from "@mui/icons-material";
 import "./post.css";
+import { useEffect, useState } from "react";
+import axios from "axios";
+import { format } from "timeago.js";
+import {Link} from "react-router-dom";
 
-export default function Post() {
+export default function Post({post}) {
+
+    const [like,setLike] = useState(post.likes.length);
+    const [isliked,setIsLiked] = useState(false);
+    const [user,setUser] = useState({});
+    const PF = process.env.REACT_APP_PUBLIC_FOLDER;
+
+    useEffect(()=>{
+
+        const fetchUser = async () => {
+          const res = await axios.get(`/users?userId=${post.userId}`);
+          setUser(res.data);
+        }
+        fetchUser();
+    },[post.userId]); 
+
+    const likeHandler =()=>{
+        setLike(isliked ? like-1 : like+1);
+        setIsLiked(!isliked);
+    };
+
   return (
     <div className="post">
         <div className="postWrapper">
             <div className="postTop">
                 <div className="postTopLeft">
-                    <img src="https://www.nicepng.com/png/full/166-1667644_dbz-dragon-ball-z-transparent-dragonball-z-gohan.png" 
-                        alt="" className="postProfileImg" />
-                    <span className="postUsername">Son Gohan</span>
-                    <span className="postDate">1 day ago</span>
+                    <Link to={`profile/${user.username}`}>
+                        <img src={user.profilePicture || "https://www.pngitem.com/pimgs/m/135-1356450_gokus-hair-hd-png-download.png"}
+                            alt="" className="postProfileImg" />
+                    </Link>
+                    <span className="postUsername">
+                        {user.username}
+                    </span>
+                    <span className="postDate">{format(post.createdAt)}</span>
                 </div>
                 <div className="postTopRight">
                     <MoreVert/>
                 </div>
             </div>
             <div className="postCenter">
-                <span className="postText">My first post!</span>
-                <img src="https://wallpaperaccess.com/full/4545965.png" 
+                <span className="postText">{post?.desc}</span>
+                <img src={post.img}
                     alt="" className="postImg" />
             </div>
             <div className="postButtom">
                 <div className="postBottomLeft">
-                    <img src="assets/like.png" alt="" className="likeIcon" />
-                    <img src="assets/heart.png" alt="" className="likeIcon" />
-                    <span className="postlikeCounter">32 pepple like it</span>
+                    <img src={`${PF}like.png`}
+                        alt="" className="likeIcon"
+                        onClick={likeHandler} />
+                    <img src={`${PF}heart.png`} 
+                        alt="" className="likeIcon"
+                        onClick={likeHandler} />
+                    <span className="postlikeCounter">{like} people like it</span>
                 </div>
                 <div className="postBottomRight">
-                    <span className="postCommentText">9 comments</span>
+                    <span className="postCommentText">{post.comment} comments</span>
                 </div>
             </div>
         </div>

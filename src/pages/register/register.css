@@ -1,0 +1,88 @@
+.regis{
+    width: 100vw;
+    height: 100vh;
+    background-image: url("https://wallpaperaccess.com/full/4545965.png");
+    background-size: cover;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.regisWrapper{
+    width: 70%;
+    height: 70%;
+    display: flex;
+}
+
+.loginLeft,.loginRight{
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.loginLogo{
+    font-size: 50px;
+    font-weight: 800;
+    color: red;
+    margin-bottom: 10px;
+    text-shadow: black 0.1em 0.1em 0.2em;
+}
+
+.regisDesc{
+    font-size: 24px;
+    color: white;
+    text-shadow: black 0.1em 0.1em 0.2em;
+}
+
+.regisBox{
+    height: 400px;
+    padding: 20px;
+    background-color: white;
+    background-color: rgba(81, 77, 77, 0.6);
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.loginInput{
+    height: 50px;
+    border-radius: 10px;
+    border: 1px solid gray;
+    font-size: 18px;
+    padding-left: 20px;
+}
+
+.loginInput:focus{
+    outline: none;
+}
+
+.loginButton{
+    height: 50px;
+    border-radius: 10px;
+    border: none;
+    background-color: black;
+    color: white;
+    font-size: 20px;
+    font-weight: 500;
+    cursor: pointer;
+}
+
+.loginForgot{
+    text-align: center;
+    color: rgb(255, 247, 247);
+}
+
+.loginRegisterButton{
+    width: 60%;
+    align-self: center;
+    height: 50px;
+    border-radius: 10px;
+    border: none;
+    background-color: red;
+    color: white;
+    font-size: 20px;
+    font-weight: 500;
+    cursor: pointer;
+}

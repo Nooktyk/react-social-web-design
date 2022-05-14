@@ -6,7 +6,7 @@ export default function Share() {
     <div className="shareContainer">
         <div className="shareWrapper">
             <div className="shareTop">
-                <img src="https://www.nicepng.com/png/full/166-1667644_dbz-dragon-ball-z-transparent-dragonball-z-gohan.png" 
+                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTcHFvbwQldZBq8qLQOUH-gGx6mLwK2PGj58w&usqp=CAU" 
                     alt="" className="shareProfileImg" />
                 <input placeholder="what's in your mind?" 
                     className="shareInput" />
