@@ -5,19 +5,22 @@ import Sidebar from "../../components/sidebar/Sidebar";
 import Topbar from "../../components/topbar/Topbar";
 import { useEffect, useState } from "react";
 import axios from "axios";
+import { useParams } from "react-router-dom";
 
 export default function Profile() {
 
   const [user,setUser] = useState({});
+  const username = useParams().username;
+  const PF = process.env.REACT_APP_PUBLIC_FOLDER;
 
   useEffect(()=>{
 
     const fetchUser = async () => {
-      const res = await axios.get(`/users?username=Black`);
+      const res = await axios.get(`/users?username=${username}`);
       setUser(res.data);
     }
     fetchUser();
-  },[]);  
+  },[username]);  
 
   return (
     <>
@@ -27,9 +30,9 @@ export default function Profile() {
       <div className="profileRight">
         <div className="profileRightTop">
           <div className="profileCover">
-            <img src={user.coverPicture || "https://wallpaperaccess.com/full/4545965.png"} 
+            <img src={user.coverPicture ? PF+user.coverPicture : PF + "kamehouse.jpg"} 
               alt="" className="profileCoverImg" />
-            <img src={user.profilePicture || "https://www.pngitem.com/pimgs/m/135-1356450_gokus-hair-hd-png-download.png"}  
+            <img src={user.profilePicture ? PF+user.profilePicture : PF+ "default.png"}  
               alt="" className="profileUserImg" />
           </div>
           <div className="profileInfo">
@@ -38,7 +41,7 @@ export default function Profile() {
           </div>
         </div>
         <div className="profileRightButtom">
-          <Feed username="Gohan"/>
+          <Feed username={username}/>
           <Rightbar user={user}/>
         </div>
       </div>

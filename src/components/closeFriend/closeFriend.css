@@ -1,17 +1,27 @@
 .sidebarFriend{
     display: flex;
+    align-items: center;
+}
+
+.sidebarGroupImg{
+    margin-right: 10px;
+    position: relative;
+    margin-bottom: 10px;
+    cursor: pointer;
+}
+.sidbarFriendImg{
+    width: 70px;
+    height: 70px;
+    object-fit: cover;
+}
+
+.sidebarGroupText{
+    display: flex;
     flex-direction: column;
-    margin-bottom: 5px;
     cursor: pointer;
 }
 
-.sidbarFriendImg{
-    width: 100px;
-    height: 100px;
-    object-fit: cover;
-    border-radius: 5px;
-}
-
-.sidebarFriendName{
-    text-align: center;
+.sidebarGoupDesc{
+    font-size: 14px;
+    font-weight: 300;
 }

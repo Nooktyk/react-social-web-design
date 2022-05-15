@@ -3,9 +3,14 @@ import "./closeFriend.css";
 export default function CloseFriend({user}) {
   return (
     <li className="sidebarFriend">
-        <img src={user.profilePicture}
+        <div className="sidebarGroupImg">
+            <img src={user.profilePicture}
             alt="" className="sidbarFriendImg" />
-        <span className="sidebarFriendName">{user.username}</span>
+        </div>
+        <div className="sidebarGroupText">
+        <span className="sidebarGoupTitle">{user.username}</span>
+        <span className="sidebarGoupDesc">{user.desc}</span>
+        </div>
     </li>
   )
 };

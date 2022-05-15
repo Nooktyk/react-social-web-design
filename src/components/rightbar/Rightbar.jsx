@@ -1,8 +1,56 @@
 import "./rightbar.css";
-import { Users } from "../../dummyData";
+import { OnlineFriend } from "../../dummyData";
 import Online from "../online/Online";
+import { useContext, useEffect, useState } from "react";
+import axios from "axios";
+import {Link} from "react-router-dom";
+import { AuthContext } from "../../context/AuthContext";
+import {Add, Remove} from "@mui/icons-material";
 
 export default function Rightbar({user}) {
+
+  const PF = process.env.REACT_APP_PUBLIC_FOLDER;
+  const [friends,setFriends] = useState([]);
+  const {user:currentUser, dispatch} = useContext(AuthContext);
+  const [followed,setFollowed] = useState(null);
+
+  useEffect(()=>{
+    setFollowed(currentUser.followings.includes(user?._id));
+    
+  },[user]);
+
+  useEffect(()=>{
+
+    const getFriends = async () => {
+
+      try{
+        const friendList = await axios.get("/users/friends/" + user?._id);
+        setFriends(friendList.data);
+
+      }catch(err){}
+    };
+    getFriends();
+
+  },[user?._id]);
+
+  const handleClick = async () => {
+    
+    try{
+      if(followed){
+        await axios.put(`/users/${user._id}/unfollow`, {
+          userId: currentUser._id,
+        });
+        dispatch({type: "UNFOLLOW", payload: user._id});
+      }else{
+        await axios.put(`/users/${user._id}/follow`, {
+          userId: currentUser._id,
+      });
+      dispatch({type: "FOLLOW", payload: user._id});
+    }
+    setFollowed(!followed);
+    }catch(err){
+    }  
+  };
 
   const HomeRightbar = () => {
     return(
@@ -17,7 +65,7 @@ export default function Rightbar({user}) {
             alt="" className="rightbarAd" />
           <h4 className="rightbarTitle">Online Friends</h4>
           <ul className="rightbarFriendList">
-            {Users.map((u)=>(
+            {OnlineFriend.map((u)=>(
               <Online key={u.id} user={u} />
             ))}
           </ul>
@@ -28,6 +76,13 @@ export default function Rightbar({user}) {
   const ProfileRightbar = () => {
     return (
       <>
+      {user.username !== currentUser.username && (
+        <button className="rightbarFollowbButton"
+          onClick={handleClick}>
+          {followed ? "Unfollow" : "Follow"}
+          {followed ? <Remove /> : <Add />}
+        </button>
+      )}
         <h4 className="rightbarTitle">Personel Information</h4>
         <div className="rightbarInfo">
           <div className="rightInfoItem">
@@ -49,40 +104,28 @@ export default function Rightbar({user}) {
             </span>
           </div>
         </div>
-        <h4 className="rightbarTitle">Photos</h4>
+        <h4 className="rightbarTitle">Friends</h4>
         <div className="rightbarFollowings">
-          <div className="righbartFollowing">
-            <img src="https://wallpapersmug.com/large/b25bfa/black-goku-and-trunks-dragon-ball-super.jpg" 
-              alt="" className="rightbarFolowingImg" />
-          </div>
-          <div className="righbartFollowing">
-            <img src="https://c4.wallpaperflare.com/wallpaper/839/639/657/dragon-ball-dragon-ball-z-dragon-ball-super-dragon-ball-xenoverse-2-hirudegarn-hd-wallpaper-preview.jpg" 
-              alt="" className="rightbarFolowingImg" />
-          </div>
-          <div className="righbartFollowing">
-            <img src="https://i.pinimg.com/736x/b8/27/e7/b827e77f3816f60585578e91103a3a16.jpg" 
-              alt="" className="rightbarFolowingImg" />
-          </div>
-          <div className="righbartFollowing">
-            <img src="https://wallpaperforu.com/wp-content/uploads/2021/07/Wallpaper-Dragon-Ball-Dragon-Ball-Z-Gohan-Dragon-Ball101920x1080.jpg" 
-              alt="" className="rightbarFolowingImg" />
-          </div>
-          <div className="righbartFollowing">
-            <img src="https://www.whatspaper.com/wp-content/uploads/2021/11/dragon-ball-z-wallpaper-whatspaper-9.jpg" 
-              alt="" className="rightbarFolowingImg" />
-          </div>
-          <div className="righbartFollowing">
-            <img src="https://p4.wallpaperbetter.com/wallpaper/410/227/670/dragon-ball-super-son-goku-ultra-instinct-goku-kamehameha-wallpaper-preview.jpg" 
-              alt="" className="rightbarFolowingImg" />
-          </div>
-          <div className="righbartFollowing">
-            <img src="https://a-static.besthdwallpaper.com/super-saiyan-goten-cchaak-dragon-ball-z-dragon-ball-legends-arts-samhrabedskth-p-wx-ll-pepexr-2800x1050-56134_88.jpg" 
-              alt="" className="rightbarFolowingImg" />
-          </div>
-          <div className="righbartFollowing">
-            <img src="https://www.whatspaper.com/wp-content/uploads/2021/09/hd-gogeta-wallpaper-whatspaper-17.jpg" 
-              alt="" className="rightbarFolowingImg" />
-          </div>
+          {friends.map((friend) => (
+            <Link 
+              key={friend.username} 
+              to={`/profile/${friend.username}`} 
+              style={{textDecoration: "none"}}
+            >
+              <div className="righbartFollowing">
+                <img
+                  src={
+                    friend.profilePicture 
+                      ? PF + friend.profilePicture 
+                      : PF + "default.png"
+                  }
+                  alt="" 
+                  className="rightbarFolowingImg" 
+                />
+                <span className="rightbarFollowingName">{friend.username}</span>
+              </div>
+            </Link>
+          ))}
         </div>
       </>
     )

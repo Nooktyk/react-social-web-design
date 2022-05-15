@@ -1,9 +1,10 @@
 import { MoreVert } from "@mui/icons-material";
 import "./post.css";
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import axios from "axios";
 import { format } from "timeago.js";
 import {Link} from "react-router-dom";
+import { AuthContext } from "../../context/AuthContext";
 
 export default function Post({post}) {
 
@@ -11,6 +12,13 @@ export default function Post({post}) {
     const [isliked,setIsLiked] = useState(false);
     const [user,setUser] = useState({});
     const PF = process.env.REACT_APP_PUBLIC_FOLDER;
+    const {user:currentUser} = useContext(AuthContext);
+
+    useEffect(()=>{
+
+        setIsLiked(post.likes.includes(currentUser._id));
+        
+    },[currentUser._id,post.likes]);
 
     useEffect(()=>{
 
@@ -22,6 +30,11 @@ export default function Post({post}) {
     },[post.userId]); 
 
     const likeHandler =()=>{
+
+        try{
+            axios.put("/posts/" + post._id + "/like", {userId:currentUser._id});
+
+        }catch(err) {}
         setLike(isliked ? like-1 : like+1);
         setIsLiked(!isliked);
     };
@@ -32,8 +45,15 @@ export default function Post({post}) {
             <div className="postTop">
                 <div className="postTopLeft">
                     <Link to={`profile/${user.username}`}>
-                        <img src={user.profilePicture || "https://www.pngitem.com/pimgs/m/135-1356450_gokus-hair-hd-png-download.png"}
-                            alt="" className="postProfileImg" />
+                        <img 
+                            src=
+                            {
+                                user.profilePicture 
+                                ? PF+user.profilePicture 
+                                : PF + "default.png"
+                            }  
+                            alt="" className="postProfileImg" 
+                        />
                     </Link>
                     <span className="postUsername">
                         {user.username}
@@ -46,7 +66,7 @@ export default function Post({post}) {
             </div>
             <div className="postCenter">
                 <span className="postText">{post?.desc}</span>
-                <img src={post.img}
+                <img src={PF + post.img}
                     alt="" className="postImg" />
             </div>
             <div className="postButtom">

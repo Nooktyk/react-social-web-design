@@ -1,8 +1,19 @@
 import "./topbar.css";
 import { Chat, Notifications, Person, Search } from "@mui/icons-material";
 import {Link} from "react-router-dom";
+import { useContext } from "react";
+import { AuthContext } from "../../context/AuthContext";
 
 export default function Topbar() {
+
+  const {user} = useContext(AuthContext);
+  const PF = process.env.REACT_APP_PUBLIC_FOLDER;
+
+  const logout =()=>{
+    window.localStorage.removeItem('user');
+    window.location.href = '/login';
+  };
+
   return (
     <div className="topbarContainer">
         <div className="topbarLeft">
@@ -21,8 +32,8 @@ export default function Topbar() {
         </div>
         <div className="topbarRight">
           <div className="topbarLinks">
-            <span className="topbarLink">Homepage</span>
-            <span className="topbarLink">Timeline</span>
+            <button className="topbarButton" onClick={()=>logout()}>Log out</button>
+            {/* <span className="topbarLink">Timeline</span> */}
           </div>
           <div className="topbarIcons">
             <div className="topbarIconItem">
@@ -37,9 +48,14 @@ export default function Topbar() {
               <span className="topbarIconBadge">1</span>
             </div>
           </div>
-          <Link to="/profile" className="topbarProfileLink"><b>Black Goku</b></Link>
-          <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTcHFvbwQldZBq8qLQOUH-gGx6mLwK2PGj58w&usqp=CAU" 
-            alt="" className="topbarImg" />
+          <Link to={`/profile/${user.username}`} className="topbarProfileLink"><b>{user.username}</b></Link>
+          <Link to={`/profile/${user.username}`}>
+            <img src={
+                user.profilePicture 
+                  ? PF + user.profilePicture 
+                  : PF + "default.png"} 
+              alt="" className="topbarImg" />
+          </Link>
         </div>
     </div>
   )

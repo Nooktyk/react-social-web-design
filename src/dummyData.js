@@ -1,141 +1,80 @@
 export const Users = [
     {
         id: 1,
-        profilePicture: "https://www.nicepng.com/png/full/166-1667644_dbz-dragon-ball-z-transparent-dragonball-z-gohan.png",
-        username: "Gohan",
+        profilePicture: "https://i.pinimg.com/originals/d6/25/e8/d625e8f9bc2962839d4f50809d4a640b.jpg",
+        username: "Saiya Family",
+        desc: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do e"
     },
     {
         id: 2,
         profilePicture: "https://geekvibesnation.com/wp-content/uploads/2018/09/55A1A523-D6E3-4680-908F-FA6D78E054CE.jpeg",
-        username: "Goten",
+        username: "More Goten Please",
+        desc: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do e"
     },
     {
         id: 3,
-        profilePicture: "https://64.media.tumblr.com/f22c8392c0f6018cef9cf5e195fd180b/127056b7f8653306-64/s640x960/8cb3f6f0fe2e141f76bfc473007b42557f757f6b.jpg",
-        username: "Trunks",
+        profilePicture: "https://i.pinimg.com/originals/1e/46/47/1e464753c6d7816cc259e54ee208edf3.jpg",
+        username: "Finding Dragon Balls",
+        desc: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do e"
     },
     {
         id: 4,
         profilePicture: "http://images5.fanpop.com/image/photos/25400000/Android-18-dragonball-z-android-18-vs-bulma-25478070-1920-1200.jpg",
-        username: "Lazuli",
+        username: "Lazuli's Fandom",
+        desc: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do e"
     },
     {
         id: 5,
-        profilePicture: "https://static0.srcdn.com/wordpress/wp-content/uploads/2020/10/Dragon-Ball-Super-Shenron-Android-17.jpg",
-        username: "Lapis",
+        profilePicture: "https://staticg.sportskeeda.com/editor/2022/01/3283b-16421930232232.png",
+        username: "Villains Only!",
+        desc: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do e"
     },
     {
         id: 6,
-        profilePicture: "https://i0.wp.com/alfabetajuega.com/hero/2022/05/goku-dragon-ball.1651847419.5233.jpg",
-        username: "Goku",
+        profilePicture: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQL_VwOEeceT4t2aFjIxUIY5jezk_zr_FHXmKm0Z3MRAx6Wc-_pey-DnMTHQUNMUeU17GQ&usqp=CAU",
+        username: "Bulma in nutshell",
+        desc: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do e"
     },
     {
         id: 7,
         profilePicture: "https://i2.wp.com/alfabetajuega.com/hero/2022/04/Se-ha-confirmado-oficialmente-cual-es-la-forma-mas-poderosa-de-Vegeta.jpg",
-        username: "Vegeta",
+        username: "Prince Vegeta",
+        desc: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do e"
     },
     {
         id: 8,
-        profilePicture: "https://numpaint.com/wp-content/uploads/2021/01/Picollo-dragon-balll-paint-by-numbers.jpg",
-        username: "Piccolo",
+        profilePicture: "http://f.ptcdn.info/005/038/000/nytukv88x2hEW1mgWS2-o.png",
+        username: "We are Namek",
+        desc: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do e"
     },
     {
         id: 9,
-        profilePicture: "https://oyster.ignimgs.com/mediawiki/apis.ign.com/dragon-ball-fighterz/0/0b/Super_Krillin.jpg",
-        username: "Krillin",
+        profilePicture: "https://static0.gamerantimages.com/wordpress/wp-content/uploads/2020/01/dragonball-super-time-machine-anime-screenshot-1.jpg",
+        username: "Time Travel!",
+        desc: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do e"
     },
     {
         id: 10,
-        profilePicture: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQL_VwOEeceT4t2aFjIxUIY5jezk_zr_FHXmKm0Z3MRAx6Wc-_pey-DnMTHQUNMUeU17GQ&usqp=CAU",
-        username: "Bulma",
+        profilePicture: "https://static1.cbrimages.com/wordpress/wp-content/uploads/2020/01/Featured-Collage-of-Many-Gods-of-Destruction-in-Dragon-Ball-Super.jpg",
+        username: "God of Destruction",
+        desc: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do e"
     },
 ];
 
-export const Posts = [
+export const OnlineFriend = [
     {
         id: 1,
-        desc: "Lorem ipsum dolor sit amet, consectetur adipiscing elit",
-        photo: "https://wallpaperaccess.com/full/4545965.png",
-        date: "2 mins ago",
-        userId: 1,
-        like: 19,
-        comment: 9,
+        profilePicture: "https://i.pinimg.com/736x/3e/a3/a7/3ea3a73bc0c6fb496c136e9b2963d443.jpg",
+        username: "Frieza",
     },
     {
         id: 2,
-        desc: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
-        photo: "https://hdwallpaperim.com/wp-content/uploads/2017/08/22/104513-Dragon_Ball_Z.jpg",
-        date: "2 mins ago",
-        userId: 2,
-        like: 19,
-        comment: 9,
+        profilePicture: "https://c.wallhere.com/photos/79/8b/Dragon_Ball_Cell_Dragon_Ball_Dragon_Ball_Z-1457479.jpg!d",
+        username: "Cell",
     },
     {
         id: 3,
-        photo: "https://wallpaperaccess.com/full/340768.jpg",
-        date: "2 mins ago",
-        userId: 3,
-        like: 19,
-        comment: 9,
-    },
-    {
-        id: 4,
-        desc: "Lorem ed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
-        photo: "https://cdn.wallpapersafari.com/34/80/BTkNmJ.jpg",
-        date: "2 mins ago",
-        userId: 4,
-        like: 19,
-        comment: 9,
-    },
-    {
-        id: 5,
-        desc: "Lorem ipsum dolor ncididunt ut labore et dolore magna aliqua.",
-        photo: "https://www.denofgeek.com/wp-content/uploads/2018/11/dragon_ball_super_86-2.jpg?fit=1280%2C720",
-        date: "2 mins ago",
-        userId: 5,
-        like: 19,
-        comment: 9,
-    },
-    {
-        id: 6,
-        photo: "https://www.teahub.io/photos/full/4-43882_dragon-ball-background-hd.jpg",
-        date: "2 mins ago",
-        userId: 6,
-        like: 19,
-        comment: 9,
-    },
-    {
-        id: 7,
-        desc: "Lorem ipsum dolor sit amet, consectet",
-        photo: "http://images5.fanpop.com/image/photos/25500000/dbz-villains-dragon-ball-z-25544599-1131-707.jpg",
-        date: "2 mins ago",
-        userId: 7,
-        like: 19,
-        comment: 9,
-    },
-    {
-        id: 8,
-        photo: "https://c4.wallpaperflare.com/wallpaper/198/274/338/dragon-ball-z-wallpaper-thumb.jpg",
-        date: "2 mins ago",
-        userId: 8,
-        like: 19,
-        comment: 9,
-    },
-    {
-        id: 9,
-        desc: "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
-        photo: "https://feedride.com/wp-content/uploads/2020/04/Dragon_Ball-Dragon_Ball_Z.jpg",
-        date: "2 mins ago",
-        userId: 9,
-        like: 19,
-        comment: 9,
-    },
-    {
-        id: 10,
-        photo: "https://i.pinimg.com/originals/76/8d/85/768d8569299c97d24532ac413c6c57ac.png",
-        date: "2 mins ago",
-        userId: 10,
-        like: 19,
-        comment: 9,
+        profilePicture: "https://i.pinimg.com/originals/2f/2a/f5/2f2af52d6c641e55de52d5bc49ff9c37.png",
+        username: "Buu",
     },
 ];
