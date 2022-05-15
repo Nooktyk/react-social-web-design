@@ -2,9 +2,9 @@ import { useEffect, useState } from "react";
 import Post from "../post/Post";
 import Share from "../share/Share";
 import "./feed.css";
-import axios from "axios";
 import { useContext } from "react";
 import { AuthContext } from "../../context/AuthContext";
+import axios from "axios";
 
 export default function Feed({username}) {
 

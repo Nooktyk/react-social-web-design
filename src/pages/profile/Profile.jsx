@@ -4,8 +4,8 @@ import Rightbar from "../../components/rightbar/Rightbar";
 import Sidebar from "../../components/sidebar/Sidebar";
 import Topbar from "../../components/topbar/Topbar";
 import { useEffect, useState } from "react";
-import axios from "axios";
 import { useParams } from "react-router-dom";
+import axios from "axios";
 
 export default function Profile() {
 
@@ -13,14 +13,19 @@ export default function Profile() {
   const username = useParams().username;
   const PF = process.env.REACT_APP_PUBLIC_FOLDER;
 
+  
+
   useEffect(()=>{
 
-    const fetchUser = async () => {
-      const res = await axios.get(`/users?username=${username}`);
-      setUser(res.data);
-    }
     fetchUser();
-  },[username]);  
+
+  },[username]);
+
+  const fetchUser = async () => {
+
+    const res = await axios.get(`/users?username=${username}`);
+    setUser(res.data);
+  };
 
   return (
     <>

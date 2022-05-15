@@ -1,10 +1,10 @@
 import { MoreVert } from "@mui/icons-material";
 import "./post.css";
 import { useContext, useEffect, useState } from "react";
-import axios from "axios";
 import { format } from "timeago.js";
 import {Link} from "react-router-dom";
 import { AuthContext } from "../../context/AuthContext";
+import axios from "axios";
 
 export default function Post({post}) {
 

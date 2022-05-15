@@ -1,11 +1,10 @@
 import "./rightbar.css";
-import { OnlineFriend } from "../../dummyData";
 import Online from "../online/Online";
 import { useContext, useEffect, useState } from "react";
-import axios from "axios";
 import {Link} from "react-router-dom";
 import { AuthContext } from "../../context/AuthContext";
 import {Add, Remove} from "@mui/icons-material";
+import axios from "axios";
 
 export default function Rightbar({user}) {
 
@@ -13,42 +12,65 @@ export default function Rightbar({user}) {
   const [friends,setFriends] = useState([]);
   const {user:currentUser, dispatch} = useContext(AuthContext);
   const [followed,setFollowed] = useState(null);
+  const [other,setOther] = useState([]);
 
   useEffect(()=>{
+
+    getOther();
+
+  },[currentUser]);
+
+  useEffect(()=>{
+
     setFollowed(currentUser.followings.includes(user?._id));
-    
-  },[user]);
-
-  useEffect(()=>{
-
-    const getFriends = async () => {
-
-      try{
-        const friendList = await axios.get("/users/friends/" + user?._id);
-        setFriends(friendList.data);
-
-      }catch(err){}
-    };
     getFriends();
+    
+  },[currentUser.followings,user]);
 
-  },[user?._id]);
+  const getFriends = async () => {
 
+    try {
+      const friendList = await axios.get(`/users/friends/${user._id}`);
+      setFriends(friendList.data);
+
+    } catch (err) {
+      // console.log(err);
+    }
+  };
+
+  const getOther = async () => {
+
+    try{
+      const otherList = await axios.get(`/users/${currentUser._id}/other`);
+      setOther(otherList.data);
+
+    } catch (err) {
+      console.log(err);
+    }
+  };
+  
   const handleClick = async () => {
     
     try{
-      if(followed){
-        await axios.put(`/users/${user._id}/unfollow`, {
-          userId: currentUser._id,
-        });
+      if (followed) {
+        await axios.put(`/users/${user._id}/unfollow`, 
+          {
+            userId: currentUser._id,
+          }
+        );
         dispatch({type: "UNFOLLOW", payload: user._id});
-      }else{
-        await axios.put(`/users/${user._id}/follow`, {
-          userId: currentUser._id,
-      });
-      dispatch({type: "FOLLOW", payload: user._id});
-    }
-    setFollowed(!followed);
-    }catch(err){
+      } else {
+        await axios.put(`/users/${user._id}/follow`, 
+          {
+            userId: currentUser._id,
+          }
+        );
+        dispatch({type: "FOLLOW", payload: user._id});
+      }
+      setFollowed(!followed);
+
+    } catch (err) {
+      console.log(err);
     }  
   };
 
@@ -58,15 +80,15 @@ export default function Rightbar({user}) {
           <div className="birthdayContainer">
             <img src="assets/gift.png" alt="" className="birthdayImg" />
             <span className="birthdayText">
-              <b>Goten</b> and <b>3 other friends</b> have a birthday today.
+              <b>Latest!</b> new experience with <b>Dragon Ball SuperHeroes</b> available now!!!. <b>more...</b>
             </span>
           </div>
-          <img src="https://www.wordstream.com/wp-content/uploads/2021/07/persuasive-ads-coca-cola-1.jpg" 
+          <img src={PF + "superhero.jpg"} 
             alt="" className="rightbarAd" />
-          <h4 className="rightbarTitle">Online Friends</h4>
+          <h4 className="rightbarTitle">Other People</h4>
           <ul className="rightbarFriendList">
-            {OnlineFriend.map((u)=>(
-              <Online key={u.id} user={u} />
+            {other.map((u)=>(
+              <Online key={u._id} user={u} />
             ))}
           </ul>
       </>
@@ -104,7 +126,7 @@ export default function Rightbar({user}) {
             </span>
           </div>
         </div>
-        <h4 className="rightbarTitle">Friends</h4>
+        <h4 className="rightbarTitle">Followings</h4>
         <div className="rightbarFollowings">
           {friends.map((friend) => (
             <Link 

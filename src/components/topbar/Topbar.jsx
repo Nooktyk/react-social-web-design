@@ -9,6 +9,10 @@ export default function Topbar() {
   const {user} = useContext(AuthContext);
   const PF = process.env.REACT_APP_PUBLIC_FOLDER;
 
+  const home =()=>{
+    window.location.href = '/';
+  };
+
   const logout =()=>{
     window.localStorage.removeItem('user');
     window.location.href = '/login';
@@ -17,7 +21,7 @@ export default function Topbar() {
   return (
     <div className="topbarContainer">
         <div className="topbarLeft">
-          <img src="https://www.pngplay.com/wp-content/uploads/12/Shenron-PNG-HD-Quality.png" 
+          <img src={PF + "shenron.png"}
             alt="" className="logoImg" />
           <Link to="/" className="logo" style={{textDecoration:"none"}}>
             <span >Dragon Ball Social World</span>
@@ -32,8 +36,8 @@ export default function Topbar() {
         </div>
         <div className="topbarRight">
           <div className="topbarLinks">
+            <button className="topbarButton" onClick={()=>home()}>Home</button>
             <button className="topbarButton" onClick={()=>logout()}>Log out</button>
-            {/* <span className="topbarLink">Timeline</span> */}
           </div>
           <div className="topbarIcons">
             <div className="topbarIconItem">
